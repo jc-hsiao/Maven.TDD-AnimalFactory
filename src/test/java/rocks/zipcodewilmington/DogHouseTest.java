@@ -1,5 +1,6 @@
 package rocks.zipcodewilmington;
 
+import org.junit.Assert;
 import org.junit.Test;
 import rocks.zipcodewilmington.animals.Dog;
 import rocks.zipcodewilmington.animals.animal_creation.AnimalFactory;
@@ -24,11 +25,103 @@ public class DogHouseTest {
         Date birthDate = new Date();
         Dog animal = AnimalFactory.createDog(name, birthDate);
         DogHouse.clear();
+        DogHouse.add(animal);
+        DogHouse.getNumberOfDogs();
 
-        // When
+        Integer actualNumOfDog = DogHouse.getNumberOfDogs();
+        Integer expectedNumOfDog = 1;
+        Assert.assertEquals(expectedNumOfDog,actualNumOfDog);
+    }
+
+
+    @Test
+    public void testAddDog(){
+        DogHouse.clear();
+        Date birthDate = new Date();
+
+        String name = "Milo";
+        Dog animal = AnimalFactory.createDog(name, birthDate);
         DogHouse.add(animal);
 
-        // Then
-        DogHouse.getNumberOfDogs();
+        String name2 = "Max";
+        Dog animal2 = AnimalFactory.createDog(name2, birthDate);
+        DogHouse.add(animal2);
+
+        Integer expectedNumOfDog = 2;
+        Assert.assertEquals(expectedNumOfDog, DogHouse.getNumberOfDogs());
     }
+
+    @Test
+    public void testRemoveByDog(){
+        Date birthDate = new Date();
+        DogHouse.clear();
+
+        String name = "Milo";
+        Dog animal = AnimalFactory.createDog(name, birthDate);
+        DogHouse.add(animal);
+
+        String name2 = "Max";
+        Dog animal2 = AnimalFactory.createDog(name2, birthDate);
+        DogHouse.add(animal2);
+
+        String name3 = "Fido";
+        Dog animal3 = AnimalFactory.createDog(name3, birthDate);
+        DogHouse.add(animal3);
+
+        Integer idOfTheDog = animal2.getId();
+        DogHouse.remove(animal2);
+        Integer expectedNumOfDog = 2 ;
+
+        Assert.assertEquals(expectedNumOfDog, DogHouse.getNumberOfDogs());
+        Assert.assertEquals(null, DogHouse.getDogById(idOfTheDog));
+    }
+
+    @Test
+    public void testRemoveById(){
+        Date birthDate = new Date();
+        DogHouse.clear();
+
+        String name = "Milo";
+        Dog animal = AnimalFactory.createDog(name, birthDate);
+        DogHouse.add(animal);
+
+        String name2 = "Max";
+        Dog animal2 = AnimalFactory.createDog(name2, birthDate);
+        DogHouse.add(animal2);
+
+        String name3 = "Fido";
+        Dog animal3 = AnimalFactory.createDog(name3, birthDate);
+        DogHouse.add(animal3);
+
+        Integer idOfTheDog = animal2.getId();
+        DogHouse.remove(idOfTheDog);
+        Integer expectedNumOfDog = 2 ;
+
+        Assert.assertEquals(expectedNumOfDog, DogHouse.getNumberOfDogs());
+        Assert.assertEquals(null, DogHouse.getDogById(idOfTheDog));
+    }
+
+    @Test
+    public void testGetDogByID(){
+        Date birthDate = new Date();
+        DogHouse.clear();
+
+        String name = "Milo";
+        Dog animal = AnimalFactory.createDog(name, birthDate);
+        DogHouse.add(animal);
+
+        String name2 = "Max";
+        Dog animal2 = AnimalFactory.createDog(name2, birthDate);
+        DogHouse.add(animal2);
+
+        String name3 = "Fido";
+        Dog animal3 = AnimalFactory.createDog(name3, birthDate);
+        DogHouse.add(animal3);
+
+        Dog expectedAnimal = animal2;
+        Assert.assertEquals(expectedAnimal, DogHouse.getDogById(animal2.getId()));
+
+    }
+
+
 }

@@ -2,7 +2,10 @@ package rocks.zipcodewilmington;
 
 import org.junit.Assert;
 import org.junit.Test;
+import rocks.zipcodewilmington.animals.Animal;
 import rocks.zipcodewilmington.animals.Cat;
+import rocks.zipcodewilmington.animals.Cat;
+import rocks.zipcodewilmington.animals.Mammal;
 
 import java.util.Date;
 
@@ -40,4 +43,59 @@ public class CatTest {
         Assert.assertEquals(givenId, retrievedId);
     }
 
+    @Test
+    public void createCatTest(){
+        String expectedName = "Miso";
+        Date expectedDate = new Date();
+        Integer expectedId = 120;
+        Cat myCat = new Cat(expectedName,expectedDate,expectedId);
+
+        Assert.assertEquals(expectedName, myCat.getName());
+        Assert.assertEquals(expectedDate, myCat.getBirthDate());
+        Assert.assertEquals(expectedId, myCat.getId());
+    }
+
+    @Test
+    public void CatSpeakTest(){
+        String expectedAnswer = "meow!";
+        Cat Cat = new Cat(null, null, null);
+        Assert.assertEquals(expectedAnswer, Cat.speak());
+    }
+
+    @Test
+    public void setCatBdayTest(){
+        Cat Cat = new Cat(null, null, null);
+        Date expectedDate = new Date();
+        Cat.setBirthDate(expectedDate);
+        Assert.assertEquals(expectedDate, Cat.getBirthDate());
+    }
+
+    @Test
+    public void CatEatTest(){
+        Cat Cat = new Cat(null, null, null);
+        Food someFood = new Food();
+        Cat.eat(someFood);
+        Integer expectedNumOfMeal = 1;
+        Assert.assertEquals( expectedNumOfMeal , Cat.getNumberOfMealsEaten());
+    }
+
+    @Test
+    public void getCatIDTest(){
+        Integer expectedId = 100;
+        Cat Cat = new Cat(null, null, expectedId);
+        Assert.assertEquals( expectedId,Cat.getId());
+    }
+
+    @Test
+    public void checkAnimalInhertTest(){
+        Cat Cat = new Cat(null, null, null);
+        Assert.assertTrue( Cat instanceof Animal);
+    }
+
+    @Test
+    public void checkMammalInhertTest(){
+        Cat Cat = new Cat(null, null, null);
+        Assert.assertTrue( Cat instanceof Mammal);
+
+    }
 }

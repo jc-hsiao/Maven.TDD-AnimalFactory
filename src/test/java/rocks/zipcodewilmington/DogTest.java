@@ -2,7 +2,11 @@ package rocks.zipcodewilmington;
 
 import org.junit.Assert;
 import org.junit.Test;
+import rocks.zipcodewilmington.animals.Animal;
 import rocks.zipcodewilmington.animals.Dog;
+import rocks.zipcodewilmington.animals.Mammal;
+
+import java.util.Date;
 
 /**
  * @author leon on 4/19/18.
@@ -28,4 +32,61 @@ public class DogTest {
         String dogName = dog.getName();
         Assert.assertEquals(dogName, givenName);
     }
+
+    @Test
+    public void createDogTest(){
+        String expectedName = "Coffee";
+        Date expectedDate = new Date(2016,3,10);
+        Integer expectedId = 100;
+        Dog myDog = new Dog(expectedName,expectedDate,expectedId);
+
+        Assert.assertEquals(expectedName, myDog.getName());
+        Assert.assertEquals(expectedDate, myDog.getBirthDate());
+        Assert.assertEquals(expectedId, myDog.getId());
+    }
+
+    @Test
+    public void dogSpeakTest(){
+        String expectedAnswer = "bark!";
+        Dog dog = new Dog(null, null, null);
+        Assert.assertEquals(expectedAnswer, dog.speak());
+    }
+
+    @Test
+    public void setDogBdayTest(){
+        Dog dog = new Dog(null, null, null);
+        Date expectedDate = new Date(2020,1,1);
+        dog.setBirthDate(expectedDate);
+        Assert.assertEquals(expectedDate, dog.getBirthDate());
+    }
+
+    @Test
+    public void dogEatTest(){
+        Dog dog = new Dog(null, null, null);
+        Food someFood = new Food();
+        dog.eat(someFood);
+        Integer expectedNumOfMeal = 1;
+        Assert.assertEquals( expectedNumOfMeal , dog.getNumberOfMealsEaten());
+    }
+
+    @Test
+    public void getDogIDTest(){
+        Integer expectedId = 100;
+        Dog dog = new Dog(null, null, expectedId);
+        Assert.assertEquals( expectedId,dog.getId());
+    }
+
+    @Test
+    public void checkAnimalInhertTest(){
+        Dog dog = new Dog(null, null, null);
+        Assert.assertTrue( dog instanceof Animal);
+    }
+
+    @Test
+    public void checkMammalInhertTest(){
+        Dog dog = new Dog(null, null, null);
+        Assert.assertTrue( dog instanceof Mammal);
+
+    }
+
 }

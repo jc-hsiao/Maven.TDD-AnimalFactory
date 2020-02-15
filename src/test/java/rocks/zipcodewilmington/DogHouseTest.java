@@ -43,12 +43,17 @@ public class DogHouseTest {
         Dog animal = AnimalFactory.createDog(name, birthDate);
         DogHouse.add(animal);
 
-        String name2 = "Max";
+        String name2 = "Ammy";
         Dog animal2 = AnimalFactory.createDog(name2, birthDate);
         DogHouse.add(animal2);
 
         Integer expectedNumOfDog = 2;
+        int idOfFirstDog = animal.getId();
+        int idOfSecondDog = animal2.getId();
         Assert.assertEquals(expectedNumOfDog, DogHouse.getNumberOfDogs());
+        Assert.assertEquals(animal, DogHouse.getDogById(idOfFirstDog));
+        Assert.assertEquals(animal2, DogHouse.getDogById(idOfSecondDog));
+
     }
 
     @Test
@@ -56,15 +61,15 @@ public class DogHouseTest {
         Date birthDate = new Date();
         DogHouse.clear();
 
-        String name = "Milo";
+        String name = "Ume";
         Dog animal = AnimalFactory.createDog(name, birthDate);
         DogHouse.add(animal);
 
-        String name2 = "Max";
+        String name2 = "Ammy";
         Dog animal2 = AnimalFactory.createDog(name2, birthDate);
         DogHouse.add(animal2);
 
-        String name3 = "Fido";
+        String name3 = "Hayabusa";
         Dog animal3 = AnimalFactory.createDog(name3, birthDate);
         DogHouse.add(animal3);
 
@@ -73,7 +78,7 @@ public class DogHouseTest {
         Integer expectedNumOfDog = 2 ;
 
         Assert.assertEquals(expectedNumOfDog, DogHouse.getNumberOfDogs());
-        Assert.assertEquals(null, DogHouse.getDogById(idOfTheDog));
+        Assert.assertNull(DogHouse.getDogById(idOfTheDog));
     }
 
     @Test
@@ -98,7 +103,7 @@ public class DogHouseTest {
         Integer expectedNumOfDog = 2 ;
 
         Assert.assertEquals(expectedNumOfDog, DogHouse.getNumberOfDogs());
-        Assert.assertEquals(null, DogHouse.getDogById(idOfTheDog));
+        Assert.assertNull(DogHouse.getDogById(idOfTheDog));
     }
 
     @Test
@@ -118,8 +123,7 @@ public class DogHouseTest {
         Dog animal3 = AnimalFactory.createDog(name3, birthDate);
         DogHouse.add(animal3);
 
-        Dog expectedAnimal = animal2;
-        Assert.assertEquals(expectedAnimal, DogHouse.getDogById(animal2.getId()));
+        Assert.assertEquals(animal2, DogHouse.getDogById(animal2.getId()));
 
     }
 

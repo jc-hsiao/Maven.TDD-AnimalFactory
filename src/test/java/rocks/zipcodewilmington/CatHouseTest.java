@@ -5,6 +5,7 @@ import org.junit.Test;
 import rocks.zipcodewilmington.animals.Cat;
 import rocks.zipcodewilmington.animals.animal_creation.AnimalFactory;
 import rocks.zipcodewilmington.animals.animal_storage.CatHouse;
+import rocks.zipcodewilmington.animals.animal_storage.DogHouse;
 
 import java.util.Date;
 
@@ -45,8 +46,14 @@ public class CatHouseTest {
         Cat animal2 = AnimalFactory.createCat(name2, birthDate);
         CatHouse.add(animal2);
 
+        int idOfFirstCat = animal.getId();
+        int idOfSecondCat = animal2.getId();
+
         Integer expectedNumOfCat = 2;
         Assert.assertEquals(expectedNumOfCat, CatHouse.getNumberOfCats());
+        Assert.assertEquals(animal, CatHouse.getCatById(idOfFirstCat));
+        Assert.assertEquals(animal2, CatHouse.getCatById(idOfSecondCat));
+
     }
 
     @Test
